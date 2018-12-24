@@ -36,3 +36,4 @@ elixir_tryout-*.tar
 /config/*.secret.exs
 
 .idea
+*.iml
