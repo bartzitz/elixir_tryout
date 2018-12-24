@@ -9,5 +9,8 @@ defmodule ElixirTryoutWeb.Router do
     pipe_through :api
 
     get "/", RootController, :index
+
+    get "/transactions", TransactionsController, :index
+    post "/transactions", TransactionsController, :create
   end
 end

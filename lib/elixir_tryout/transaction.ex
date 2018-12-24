@@ -2,6 +2,7 @@ defmodule ElixirTryout.Transaction do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:amount, :currency]}
 
   schema "transactions" do
     field :amount, :decimal
