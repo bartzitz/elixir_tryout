@@ -25,19 +25,21 @@ defmodule Worker do
     queue_name = "funds_engine.calculatate_gbp_equivalent"
     {:ok, %{queue: queue_name}} = AMQP.Queue.declare(channel, queue_name, queue_options)
 
+    pid = spawn &wait_for_messages/0
+
     AMQP.Queue.bind(channel, queue_name, "internal")
-    AMQP.Basic.consume(channel, queue_name, nil, no_ack: true)
+    AMQP.Basic.consume(channel, queue_name, pid, no_ack: true)
     IO.puts "Waiting for messages ..."
 
-    wait_for_messages(channel)
+    pid
   end
 
-  def wait_for_messages(channel) do
+  def wait_for_messages do
     receive do
       {:basic_deliver, message, _meta} ->
         IO.puts "Received message:  #{message}"
 
-        wait_for_messages(channel)
+        wait_for_messages
     end
   end
 end
