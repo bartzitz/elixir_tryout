@@ -3,12 +3,29 @@
 
 defmodule Worker do
   def start do
-    {:ok, connection} = AMQP.Connection.open
-    {:ok, channel} = AMQP.Channel.open(connection)
+    {:ok, conn} = AMQP.Connection.open("amqp://guest:guest@rabbitmq")
+    {:ok, channel} = AMQP.Channel.open(conn)
 
-    AMQP.Exchange.declare(channel, "test_exchange", :direct)
-    {:ok, %{queue: queue_name}} = AMQP.Queue.declare(channel, "", exclusive: true)
-    AMQP.Queue.bind(channel, queue_name, "test_exchange")
+    :ok = AMQP.Exchange.direct(channel, "internal",
+      durable: true,
+      arguments: [
+        {"alternate-exchange", :longstr, "lost_messages_exchange"}
+      ]
+    )
+
+    queue_options = [
+      arguments: [
+        {"x-dead-letter-exchange", :longstr, "dead_letter_exchange"}
+      ],
+      durable: true,
+      auto_delete: false,
+      exclusive: false
+    ]
+
+    queue_name = "funds_engine.calculatate_gbp_equivalent"
+    {:ok, %{queue: queue_name}} = AMQP.Queue.declare(channel, queue_name, queue_options)
+
+    AMQP.Queue.bind(channel, queue_name, "internal")
     AMQP.Basic.consume(channel, queue_name, nil, no_ack: true)
     IO.puts "Waiting for messages ..."
 
