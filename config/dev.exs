@@ -52,5 +52,5 @@ config :elixir_tryout, ElixirTryout.Repo,
   username: "root",
   password: "",
   database: "elixir_tryout",
-  hostname: "box",
+  hostname: "localhost",
   pool_size: 10
