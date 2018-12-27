@@ -4,14 +4,19 @@ defmodule ElixirTryout.Application do
   @moduledoc false
 
   use Application
+  import Supervisor.Spec
 
   def start(_type, _args) do
+    WorkersManager.start_link()
+    Worker.start
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       ElixirTryout.Repo,
       # Start the endpoint when the application starts
-      ElixirTryoutWeb.Endpoint
+      supervisor(ElixirTryoutWeb.Endpoint, []),
+      worker(RabbitMQShutdown, [[timeout: 20_000]], [shutdown: 25_000])
       # Starts a worker by calling: ElixirTryout.Worker.start_link(arg)
       # {ElixirTryout.Worker, arg},
     ]
