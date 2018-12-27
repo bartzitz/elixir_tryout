@@ -11,6 +11,8 @@ defmodule ElixirTryoutWeb.Router do
     get "/", RootController, :index
 
     get "/transactions", TransactionsController, :index
+    get "/transactions/:id", TransactionsController, :show
     post "/transactions", TransactionsController, :create
+    put "/transactions/:id", TransactionsController, :update
   end
 end

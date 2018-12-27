@@ -1,7 +1,7 @@
 defmodule ElixirTryoutWeb.TransactionsControllerTest do
   use ElixirTryoutWeb.ConnCase
 
-  describe "index/0" do
+  describe "index/2" do
     test "responds with empty array when no transactions", %{conn: conn} do
       response =
         conn
@@ -24,6 +24,87 @@ defmodule ElixirTryoutWeb.TransactionsControllerTest do
       ]
 
       assert response == expected
+    end
+  end
+
+  describe "show/2" do
+    test "responds with not found error when no transaction", %{conn: conn} do
+      response =
+        conn
+        |> get("/api/transactions/1")
+        |> json_response(404)
+
+      assert response == %{"errors" => ["invalid transaction"]}
+    end
+
+    test "responds with transaction if exist", %{conn: conn} do
+      {_, transaction} = ElixirTryout.Repo.insert(%ElixirTryout.Transaction{amount: 120, currency: "USD"})
+
+      response =
+        conn
+        |> get("/api/transactions/#{transaction.id}")
+        |> json_response(200)
+
+      expected = %{"amount" => "120", "currency" => "USD"}
+
+      assert response == expected
+    end
+  end
+
+  describe "update/2" do
+    test "responds with not found error when no transaction", %{conn: conn} do
+      response =
+        conn
+        |> put("/api/transactions/1")
+        |> json_response(404)
+
+      assert response == %{"errors" => ["invalid transaction"]}
+    end
+
+    test "responds with bad request error when no transaction", %{conn: conn} do
+      {_, transaction} = ElixirTryout.Repo.insert(%ElixirTryout.Transaction{amount: 120, currency: "USD"})
+      params = %{amount: ""}
+
+      response =
+        conn
+        |> put("/api/transactions/#{transaction.id}", params)
+        |> json_response(400)
+
+      assert response == %{"errors" => %{"amount" => ["can't be blank"]}}
+    end
+
+    test "responds with transaction if exist", %{conn: conn} do
+      {_, transaction} = ElixirTryout.Repo.insert(%ElixirTryout.Transaction{amount: 120, currency: "USD"})
+      params = %{amount: 101}
+
+      response =
+        conn
+        |> put("/api/transactions/#{transaction.id}", params)
+        |> json_response(200)
+
+      expected = %{"amount" => "101", "currency" => "USD"}
+
+      assert response == expected
+    end
+  end
+
+  describe "create/2" do
+    test "responds with transaction", %{conn: conn} do
+      response =
+        conn
+        |> post("/api/transactions", %{currency: "USD", amount: "123.59"})
+        |> json_response(200)
+
+      assert response == %{"amount" => "123.59", "currency" => "USD"}
+    end
+
+    test "responds with errors", %{conn: conn} do
+      response =
+        conn
+        |> post("/api/transactions")
+        |> json_response(400)
+
+      assert response == %{"errors" => %{"amount" => ["can't be blank"], "currency" => ["can't be blank"]}}
     end
   end
 end
