@@ -14,5 +14,5 @@ config :elixir_tryout, ElixirTryout.Repo,
   username: "root",
   password: "",
   database: "elixir_tryout_test",
-  hostname: "box",
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
