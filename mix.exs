@@ -20,7 +20,7 @@ defmodule ElixirTryout.MixProject do
   def application do
     [
       mod: {ElixirTryout.Application, []},
-      extra_applications: [:logger, :runtime_tools, :amqp]
+      extra_applications: [:lager, :logger, :runtime_tools, :amqp]
     ]
   end
 
