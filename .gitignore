@@ -35,5 +35,7 @@ elixir_tryout-*.tar
 # variables.
 /config/*.secret.exs
 
+.elixir_ls
+.vscode/
 .idea
 *.iml
