@@ -1,6 +1,8 @@
 defmodule ElixirTryoutWeb.TransactionsController do
   use ElixirTryoutWeb, :controller
 
+  import ElixirTryoutWeb.ErrorHelpers, only: [translate_error: 1]
+
   def index(conn, _) do
     transactions = ElixirTryout.Repo.all(ElixirTryout.Transaction)
 
@@ -20,9 +22,11 @@ defmodule ElixirTryoutWeb.TransactionsController do
 
   def create(conn, params) do
     changeset = ElixirTryout.Transaction.changeset(%ElixirTryout.Transaction{}, params)
-    {_, res} = ElixirTryout.Repo.insert(changeset)
 
-    json(conn, %{status: "ok"})
+    case ElixirTryout.Repo.insert(changeset) do
+      {:ok, result} -> conn |> put_status(:ok) |> json(result)
+      {:error, result} -> conn |> put_status(:bad_request) |> json(%{errors: Ecto.Changeset.traverse_errors(result, &translate_error/1)})
+    end
   end
 
   def update(conn, %{"id" => id} = params) do
@@ -32,12 +36,11 @@ defmodule ElixirTryoutWeb.TransactionsController do
       changeset = ElixirTryout.Transaction.changeset(transaction, params)
 
       case ElixirTryout.Repo.update(changeset) do
-        {:ok, transaction} ->
-          json conn |> put_status(:ok), transaction
+        {:ok, result} ->
+          json conn |> put_status(:ok), result
         {:error, result} ->
-
           json conn |> put_status(:bad_request),
-               %{errors: result.errors }
+            %{errors: Ecto.Changeset.traverse_errors(result, &translate_error/1)}
       end
     else
       json(conn |> put_status(:not_found),

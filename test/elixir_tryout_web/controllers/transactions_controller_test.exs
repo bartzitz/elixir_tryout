@@ -70,7 +70,7 @@ defmodule ElixirTryoutWeb.TransactionsControllerTest do
         |> put("/api/transactions/#{transaction.id}", params)
         |> json_response(400)
 
-      assert response == %{"errors" => [amount: {"can't be blank", [validation: :required]}]}
+      assert response == %{"errors" => %{"amount" => ["can't be blank"]}}
     end
 
     test "responds with transaction if exist", %{conn: conn} do
@@ -85,6 +85,26 @@ defmodule ElixirTryoutWeb.TransactionsControllerTest do
       expected = %{"amount" => "101", "currency" => "USD"}
 
       assert response == expected
+    end
+  end
+
+  describe "create/2" do
+    test "responds with transaction", %{conn: conn} do
+      response =
+        conn
+        |> post("/api/transactions", %{currency: "USD", amount: "123.59"})
+        |> json_response(200)
+
+      assert response == %{"amount" => "123.59", "currency" => "USD"}
+    end
+
+    test "responds with errors", %{conn: conn} do
+      response =
+        conn
+        |> post("/api/transactions")
+        |> json_response(400)
+
+      assert response == %{"errors" => %{"amount" => ["can't be blank"], "currency" => ["can't be blank"]}}
     end
   end
 end
