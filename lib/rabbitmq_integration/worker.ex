@@ -39,7 +39,7 @@ defmodule Worker do
       {:basic_deliver, message, _meta} ->
         IO.puts "Received message:  #{message}"
 
-        wait_for_messages
+        wait_for_messages()
     end
   end
 end
