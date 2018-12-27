@@ -1,17 +1,17 @@
 defmodule ElixirTryout.WebAdaptors.BaseAdaptor do
-  def post(host, path, options) do
+  def post(path, options) do
     body = Jason.encode!(options)
 
-    "#{host}/#{path}?#{URI.encode_query(crm_principle_identifier())}"
-    |> HTTPoison.post!(body, headers)
+    "#{path}?#{URI.encode_query(crm_principle_identifier())}"
+    |> HTTPoison.post!(body, headers())
     |> evaluate_response()
   end
 
-  def get(host, path, options) do
+  def get(path, options) do
     params = Map.merge(options, crm_principle_identifier())
 
-    "#{host}/#{path}"
-    |> HTTPoison.get!(headers, params: params)
+    "#{path}"
+    |> HTTPoison.get!(headers(), params: params)
     |> evaluate_response()
   end
 
