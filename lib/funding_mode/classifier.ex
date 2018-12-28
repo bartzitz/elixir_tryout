@@ -14,9 +14,13 @@ defmodule FundingMode.Classifier do
 
   def identify_funding_type(classifier_struct) do
     cond do
-      no_compliance_relationship?(classifier_struct) || nested_payments_with_collections?(classifier_struct) || regulated_affiliate_receipts? -> prohibited()
+      classifier_struct |> validate_data([&no_compliance_relationship?/1, &nested_payments_with_collections?/1, &regulated_affiliate_receipts?/1]) -> prohibited()
     end
   end
+
+  def no_compliance_relationship?(val), do: true
+  def nested_payments_with_collections?(val), do: true
+  def regulated_affiliate_receipts?(val), do: true
 
   def prohibited, do: "prohibited"
   def collections, do: "collections"
@@ -25,4 +29,10 @@ defmodule FundingMode.Classifier do
   def from_client, do: "from_client"
   def obo_client, do: "obo_client"
   def obo_clients_customer, do: "obo_clients_customer"
+
+  def validate_data(value, functions) do
+    functions
+    |> Enum.map(fn function -> function.(value)  end)
+    |> Enum.any
+  end
 end
