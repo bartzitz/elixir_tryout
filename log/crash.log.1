@@ -1,0 +1,393 @@
+2018-12-26 13:12:18 =CRASH REPORT====
+  crasher:
+    initial call: cowboy_stream_h:request_process/3
+    pid: <0.455.0>
+    registered_name: []
+    exception exit: {{{{#{'__exception__' => true,'__struct__' => 'Elixir.Phoenix.Router.NoRouteError',conn => #{'__struct__' => 'Elixir.Plug.Conn',adapter => {'Elixir.Plug.Cowboy.Conn',#{bindings => #{},body_length => 0,cert => undefined,has_body => false,headers => #{<<"accept">> => <<"*/*">>,<<"host">> => <<"localhost:4000">>,<<"user-agent">> => <<"curl/7.61.0">>},host => <<"localhost">>,host_info => undefined,method => <<"GET">>,path => <<"/transactions">>,path_info => undefined,peer => {{127,0,0,1},53530},pid => <0.454.0>,port => 4000,qs => <<>>,ref => 'Elixir.ElixirTryoutWeb.Endpoint.HTTP',scheme => <<"http">>,sock => {{127,0,0,1},4000},streamid => 1,version => 'HTTP/1.1'}},assigns => #{},before_send => [#Fun<Elixir.Plug.Logger.1.112466771>],body_params => #{},cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},halted => false,host => <<"localhost">>,method => <<"GET">>,owner => <0.455.0>,params => #{},path_info => [<<"transactions">>],path_params => #{},port => 4000,private => #{'Elixir.ElixirTryoutWeb.Router' => {[],#{}},phoenix_endpoint => 'Elixir.ElixirTryoutWeb.Endpoint',phoenix_router => 'Elixir.ElixirTryoutWeb.Router',plug_session_fetch => #Fun<Elixir.Plug.Session.1.58261320>},query_params => #{},query_string => <<>>,remote_ip => {127,0,0,1},req_cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},req_headers => [{<<"accept">>,<<"*/*">>},{<<"host">>,<<"localhost:4000">>},{<<"user-agent">>,<<"curl/7.61.0">>}],request_path => <<"/transactions">>,resp_body => nil,resp_cookies => #{},resp_headers => [{<<"cache-control">>,<<"max-age=0, private, must-revalidate">>},{<<"x-request-id">>,<<"2lptr5op06bgbpb8s80000b1">>}],scheme => http,script_name => [],secret_key_base => <<"xlbCs7C/aHc1HedkLWYap5uhUMrekO79jdDP2vxdHhggsNmanGYfhzh6vEXiiIug">>,state => unset,status => nil},message => <<"no route found for GET /transactions (ElixirTryoutWeb.Router)">>,plug_status => 404,router => 'Elixir.ElixirTryoutWeb.Router'},[{'Elixir.ElixirTryoutWeb.Router','__match_route__',4,[{file,"lib/elixir_tryout_web/router.ex"},{line,1}]},{'Elixir.ElixirTryoutWeb.Router',call,2,[{file,"lib/phoenix/router.ex"},{line,304}]},{'Elixir.ElixirTryoutWeb.Endpoint',plug_builder_call,2,[{file,"lib/elixir_tryout_web/endpoint.ex"},{line,1}]},{'Elixir.ElixirTryoutWeb.Endpoint','call (overridable 3)',2,[{file,"lib/plug/debugger.ex"},{line,122}]},{'Elixir.ElixirTryoutWeb.Endpoint',call,2,[{file,"lib/elixir_tryout_web/endpoint.ex"},{line,1}]},{'Elixir.Phoenix.Endpoint.Cowboy2Handler',init,2,[{file,"lib/phoenix/endpoint/cowboy2_handler.ex"},{line,34}]},{cowboy_handler,execute,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_handler.erl"},{line,41}]},{cowboy_stream_h,execute,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,293}]},{cowboy_stream_h,request_process,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,271}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]},{'Elixir.ElixirTryoutWeb.Endpoint',call,[#{'__struct__' => 'Elixir.Plug.Conn',adapter => {'Elixir.Plug.Cowboy.Conn',#{bindings => #{},body_length => 0,cert => undefined,has_body => false,headers => #{<<"accept">> => <<"*/*">>,<<"host">> => <<"localhost:4000">>,<<"user-agent">> => <<"curl/7.61.0">>},host => <<"localhost">>,host_info => undefined,method => <<"GET">>,path => <<"/transactions">>,path_info => undefined,peer => {{127,0,0,1},53530},pid => <0.454.0>,port => 4000,qs => <<>>,ref => 'Elixir.ElixirTryoutWeb.Endpoint.HTTP',scheme => <<"http">>,sock => {{127,0,0,1},4000},streamid => 1,version => 'HTTP/1.1'}},assigns => #{},before_send => [],body_params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => body_params},cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},halted => false,host => <<"localhost">>,method => <<"GET">>,owner => <0.455.0>,params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => params},path_info => [<<"transactions">>],path_params => #{},port => 4000,private => #{},query_params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => query_params},query_string => <<>>,remote_ip => {127,0,0,1},req_cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},req_headers => [{<<"accept">>,<<"*/*">>},{<<"host">>,<<"localhost:4000">>},{<<"user-agent">>,<<"curl/7.61.0">>}],request_path => <<"/transactions">>,resp_body => nil,resp_cookies => #{},resp_headers => [{<<"cache-control">>,<<"max-age=0, private, must-revalidate">>}],scheme => http,script_name => [],secret_key_base => nil,state => unset,status => nil},[]]}},[{'Elixir.Phoenix.Endpoint.Cowboy2Handler',init,2,[{file,"lib/phoenix/endpoint/cowboy2_handler.ex"},{line,43}]},{cowboy_handler,execute,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_handler.erl"},{line,41}]},{cowboy_stream_h,execute,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,293}]},{cowboy_stream_h,request_process,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,271}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]},[{'Elixir.Phoenix.Endpoint.Cowboy2Handler',init,2,[{file,"lib/phoenix/endpoint/cowboy2_handler.ex"},{line,43}]},{cowboy_handler,execute,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_handler.erl"},{line,41}]},{cowboy_stream_h,execute,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,293}]},{cowboy_stream_h,request_process,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,271}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.454.0>,<0.352.0>,<0.351.0>,'Elixir.ElixirTryoutWeb.Endpoint','Elixir.ElixirTryout.Supervisor',<0.315.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.454.0>]
+    dictionary: [{logger_metadata,{true,[{request_id,<<"2lptr5op06bgbpb8s80000b1">>}]}}]
+    trap_exit: false
+    status: running
+    heap_size: 6772
+    stack_size: 27
+    reductions: 82033
+  neighbours:
+2018-12-26 13:12:18 =ERROR REPORT====
+Ranch listener 'Elixir.ElixirTryoutWeb.Endpoint.HTTP', connection process <0.454.0>, stream 1 had its request process <0.455.0> exit with reason {{#{'__exception__' => true,'__struct__' => 'Elixir.Phoenix.Router.NoRouteError',conn => #{'__struct__' => 'Elixir.Plug.Conn',adapter => {'Elixir.Plug.Cowboy.Conn',#{bindings => #{},body_length => 0,cert => undefined,has_body => false,headers => #{<<"accept">> => <<"*/*">>,<<"host">> => <<"localhost:4000">>,<<"user-agent">> => <<"curl/7.61.0">>},host => <<"localhost">>,host_info => undefined,method => <<"GET">>,path => <<"/transactions">>,path_info => undefined,peer => {{127,0,0,1},53530},pid => <0.454.0>,port => 4000,qs => <<>>,ref => 'Elixir.ElixirTryoutWeb.Endpoint.HTTP',scheme => <<"http">>,sock => {{127,0,0,1},4000},streamid => 1,version => 'HTTP/1.1'}},assigns => #{},before_send => [#Fun<Elixir.Plug.Logger.1.112466771>],body_params => #{},cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},halted => false,host => <<"localhost">>,method => <<"GET">>,owner => <0.455.0>,params => #{},path_info => [<<"transactions">>],path_params => #{},port => 4000,private => #{'Elixir.ElixirTryoutWeb.Router' => {[],#{}},phoenix_endpoint => 'Elixir.ElixirTryoutWeb.Endpoint',phoenix_router => 'Elixir.ElixirTryoutWeb.Router',plug_session_fetch => #Fun<Elixir.Plug.Session.1.58261320>},query_params => #{},query_string => <<>>,remote_ip => {127,0,0,1},req_cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},req_headers => [{<<"accept">>,<<"*/*">>},{<<"host">>,<<"localhost:4000">>},{<<"user-agent">>,<<"curl/7.61.0">>}],request_path => <<"/transactions">>,resp_body => nil,resp_cookies => #{},resp_headers => [{<<"cache-control">>,<<"max-age=0, private, must-revalidate">>},{<<"x-request-id">>,<<"2lptr5op06bgbpb8s80000b1">>}],scheme => http,script_name => [],secret_key_base => <<"xlbCs7C/aHc1HedkLWYap5uhUMrekO79jdDP2vxdHhggsNmanGYfhzh6vEXiiIug">>,state => unset,status => nil},message => <<"no route found for GET /transactions (ElixirTryoutWeb.Router)">>,plug_status => 404,router => 'Elixir.ElixirTryoutWeb.Router'},[{'Elixir.ElixirTryoutWeb.Router','__match_route__',4,[{file,"lib/elixir_tryout_web/router.ex"},{line,1}]},{'Elixir.ElixirTryoutWeb.Router',call,2,[{file,"lib/phoenix/router.ex"},{line,304}]},{'Elixir.ElixirTryoutWeb.Endpoint',plug_builder_call,2,[{file,"lib/elixir_tryout_web/endpoint.ex"},{line,1}]},{'Elixir.ElixirTryoutWeb.Endpoint','call (overridable 3)',2,[{file,"lib/plug/debugger.ex"},{line,122}]},{'Elixir.ElixirTryoutWeb.Endpoint',call,2,[{file,"lib/elixir_tryout_web/endpoint.ex"},{line,1}]},{'Elixir.Phoenix.Endpoint.Cowboy2Handler',init,2,[{file,"lib/phoenix/endpoint/cowboy2_handler.ex"},{line,34}]},{cowboy_handler,execute,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_handler.erl"},{line,41}]},{cowboy_stream_h,execute,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,293}]},{cowboy_stream_h,request_process,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,271}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]},{'Elixir.ElixirTryoutWeb.Endpoint',call,[#{'__struct__' => 'Elixir.Plug.Conn',adapter => {'Elixir.Plug.Cowboy.Conn',#{bindings => #{},body_length => 0,cert => undefined,has_body => false,headers => #{<<"accept">> => <<"*/*">>,<<"host">> => <<"localhost:4000">>,<<"user-agent">> => <<"curl/7.61.0">>},host => <<"localhost">>,host_info => undefined,method => <<"GET">>,path => <<"/transactions">>,path_info => undefined,peer => {{127,0,0,1},53530},pid => <0.454.0>,port => 4000,qs => <<>>,ref => 'Elixir.ElixirTryoutWeb.Endpoint.HTTP',scheme => <<"http">>,sock => {{127,0,0,1},4000},streamid => 1,version => 'HTTP/1.1'}},assigns => #{},before_send => [],body_params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => body_params},cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},halted => false,host => <<"localhost">>,method => <<"GET">>,owner => <0.455.0>,params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => params},path_info => [<<"transactions">>],path_params => #{},port => 4000,private => #{},query_params => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => query_params},query_string => <<>>,remote_ip => {127,0,0,1},req_cookies => #{'__struct__' => 'Elixir.Plug.Conn.Unfetched',aspect => cookies},req_headers => [{<<"accept">>,<<"*/*">>},{<<"host">>,<<"localhost:4000">>},{<<"user-agent">>,<<"curl/7.61.0">>}],request_path => <<"/transactions">>,resp_body => nil,resp_cookies => #{},resp_headers => [{<<"cache-control">>,<<"max-age=0, private, must-revalidate">>}],scheme => http,script_name => [],secret_key_base => nil,state => unset,status => nil},[]]}} and stacktrace [{'Elixir.Phoenix.Endpoint.Cowboy2Handler',init,2,[{file,"lib/phoenix/endpoint/cowboy2_handler.ex"},{line,43}]},{cowboy_handler,execute,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_handler.erl"},{line,41}]},{cowboy_stream_h,execute,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,293}]},{cowboy_stream_h,request_process,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/cowboy/src/cowboy_stream_h.erl"},{line,271}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    child_terminated
+     Reason:     killed
+     Offender:   [{pid,<0.575.0>},{id,{acceptor,<0.475.0>,100}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    child_terminated
+     Reason:     killed
+     Offender:   [{pid,<0.574.0>},{id,{acceptor,<0.475.0>,99}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.574.0>},{id,{acceptor,<0.475.0>,99}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.573.0>},{id,{acceptor,<0.475.0>,98}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.572.0>},{id,{acceptor,<0.475.0>,97}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.571.0>},{id,{acceptor,<0.475.0>,96}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.570.0>},{id,{acceptor,<0.475.0>,95}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.569.0>},{id,{acceptor,<0.475.0>,94}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.568.0>},{id,{acceptor,<0.475.0>,93}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.567.0>},{id,{acceptor,<0.475.0>,92}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.566.0>},{id,{acceptor,<0.475.0>,91}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.565.0>},{id,{acceptor,<0.475.0>,90}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.564.0>},{id,{acceptor,<0.475.0>,89}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.563.0>},{id,{acceptor,<0.475.0>,88}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.562.0>},{id,{acceptor,<0.475.0>,87}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.561.0>},{id,{acceptor,<0.475.0>,86}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.560.0>},{id,{acceptor,<0.475.0>,85}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.559.0>},{id,{acceptor,<0.475.0>,84}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.558.0>},{id,{acceptor,<0.475.0>,83}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.475.0>,ranch_acceptors_sup}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.557.0>},{id,{acceptor,<0.475.0>,82}},{mfargs,{ranch_acceptor,start_link,[#Port<0.1031>,ranch_tcp,error_logger,<0.474.0>]}},{restart_type,permanent},{shutdown,brutal_kill},{child_type,worker}]
+
+2018-12-26 13:27:12 =SUPERVISOR REPORT====
+     Supervisor: {<0.473.0>,ranch_listener_sup}
+     Context:    child_terminated
+     Reason:     shutdown
+     Offender:   [{pid,<0.475.0>},{id,ranch_acceptors_sup},{mfargs,{ranch_acceptors_sup,start_link,['Elixir.ElixirTryoutWeb.Endpoint.HTTP',ranch_tcp]}},{restart_type,permanent},{shutdown,infinity},{child_type,supervisor}]
+
+2018-12-26 14:52:08 =CRASH REPORT====
+  crasher:
+    initial call: application_master:init/4
+    pid: <0.441.0>
+    registered_name: []
+    exception exit: {{bad_return,{{'Elixir.ElixirTryout.Application',start,[normal,[]]},{'EXIT',{undef,[{'Elixir.Supervisor.Spec',supervisor,['Elixir.ElixirTryoutWeb.Endpoint'],[]},{'Elixir.ElixirTryout.Application',start,2,[{file,"lib/elixir_tryout/application.ex"},{line,14}]},{application_master,start_it_old,4,[{file,"application_master.erl"},{line,277}]}]}}}},[{application_master,init,4,[{file,"application_master.erl"},{line,138}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.440.0>]
+    message_queue_len: 1
+    messages: [{'EXIT',<0.442.0>,normal}]
+    links: [<0.440.0>,<0.43.0>]
+    dictionary: []
+    trap_exit: true
+    status: running
+    heap_size: 610
+    stack_size: 27
+    reductions: 228
+  neighbours:
+2018-12-26 15:25:07 =SUPERVISOR REPORT====
+     Supervisor: {local,'Elixir.ElixirTryout.Supervisor'}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.463.0>},{id,'Elixir.DrainStop'},{mfargs,{'Elixir.DrainStop',start_link,[[{timeout,10000},{endpoint,'Elixir.ElixirTryoutWeb.Endpoint'}]]}},{restart_type,permanent},{shutdown,15000},{child_type,worker}]
+
+2018-12-26 16:25:17 =SUPERVISOR REPORT====
+     Supervisor: {<0.417.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     {badarg,[{erlang,size,[<0.389.0>],[]},{rabbit_framing_amqp_0_9_1,shortstr_size,1,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_framing_amqp_0_9_1.erl"},{line,185}]},{rabbit_framing_amqp_0_9_1,encode_method_fields,1,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_framing_amqp_0_9_1.erl"},{line,1098}]},{rabbit_binary_generator,build_simple_method_frame,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_binary_generator.erl"},{line,59}]},{rabbit_writer,internal_send_command_async,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,333}]},{rabbit_writer,handle_message,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,209}]},{rabbit_writer,mainloop1,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,193}]},{rabbit_writer,mainloop,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,184}]}]}
+     Offender:   [{pid,<0.420.0>},{name,writer},{mfargs,{rabbit_writer,start_link,[#Port<0.77>,1,131072,rabbit_framing_amqp_0_9_1,<0.419.0>,{<<"client 127.0.0.1:34247 -> 127.0.0.1:5672">>,1}]}},{restart_type,transient},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:25:17 =ERROR REPORT====
+Error in process <0.420.0> with exit value:
+{badarg,[{erlang,size,[<0.389.0>],[]},{rabbit_framing_amqp_0_9_1,shortstr_size,1,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_framing_amqp_0_9_1.erl"},{line,185}]},{rabbit_framing_amqp_0_9_1,encode_method_fields,1,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_framing_amqp_0_9_1.erl"},{line,1098}]},{rabbit_binary_generator,build_simple_method_frame,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_binary_generator.erl"},{line,59}]},{rabbit_writer,internal_send_command_async,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,333}]},{rabbit_writer,handle_message,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,209}]},{rabbit_writer,mainloop1,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,193}]},{rabbit_writer,mainloop,2,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/rabbit_writer.erl"},{line,184}]}]}
+2018-12-26 16:25:17 =SUPERVISOR REPORT====
+     Supervisor: {<0.417.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.420.0>},{name,writer},{mfargs,{rabbit_writer,start_link,[#Port<0.77>,1,131072,rabbit_framing_amqp_0_9_1,<0.419.0>,{<<"client 127.0.0.1:34247 -> 127.0.0.1:5672">>,1}]}},{restart_type,transient},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:37:40 =ERROR REPORT====
+** Generic server <0.376.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"worker">>},{'basic.cancel',<<"worker">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:37:40 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.376.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.375.0>,<0.368.0>,<0.366.0>,<0.365.0>,amqp_sup,<0.278.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.375.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:38023 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 27
+    reductions: 2454
+  neighbours:
+2018-12-26 16:37:40 =SUPERVISOR REPORT====
+     Supervisor: {<0.375.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.376.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:38023 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:37:40 =SUPERVISOR REPORT====
+     Supervisor: {<0.375.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.376.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:38023 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:40:33 =ERROR REPORT====
+** Generic server <0.430.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"worker">>},{'basic.cancel',<<"worker">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:40:33 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.430.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.429.0>,<0.423.0>,<0.421.0>,<0.420.0>,amqp_sup,<0.290.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.429.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:35749 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 27
+    reductions: 2377
+  neighbours:
+2018-12-26 16:40:33 =SUPERVISOR REPORT====
+     Supervisor: {<0.429.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.430.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:35749 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:40:33 =SUPERVISOR REPORT====
+     Supervisor: {<0.429.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.430.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:35749 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:43:30 =ERROR REPORT====
+** Generic server <0.431.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"amq.ctag-UnXb7TX7mb9iqZl1u3F6Dg">>},{'basic.cancel',<<"amq.ctag-UnXb7TX7mb9iqZl1u3F6Dg">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:43:30 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.431.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.430.0>,<0.424.0>,<0.422.0>,<0.421.0>,amqp_sup,<0.290.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.430.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:48679 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 987
+    stack_size: 27
+    reductions: 2847
+  neighbours:
+2018-12-26 16:43:30 =SUPERVISOR REPORT====
+     Supervisor: {<0.430.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.431.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:48679 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:43:30 =SUPERVISOR REPORT====
+     Supervisor: {<0.430.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.431.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:48679 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:44:19 =ERROR REPORT====
+** Generic server <0.432.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"amq.ctag-VrDJ32b-irR22hGm88RNow">>},{'basic.cancel',<<"amq.ctag-VrDJ32b-irR22hGm88RNow">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:44:19 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.432.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.431.0>,<0.425.0>,<0.423.0>,<0.422.0>,amqp_sup,<0.290.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.431.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:55891 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 1598
+    stack_size: 27
+    reductions: 2884
+  neighbours:
+2018-12-26 16:44:19 =SUPERVISOR REPORT====
+     Supervisor: {<0.431.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.432.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:55891 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:44:19 =SUPERVISOR REPORT====
+     Supervisor: {<0.431.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.432.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:55891 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:44:25 =ERROR REPORT====
+** Generic server <0.462.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"amq.ctag-VrDJ32b-irR22hGm88RNow">>},{'basic.cancel',<<"amq.ctag-VrDJ32b-irR22hGm88RNow">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:44:25 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.462.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.461.0>,<0.455.0>,<0.453.0>,<0.452.0>,amqp_sup,<0.290.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.461.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:46033 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 1598
+    stack_size: 27
+    reductions: 2840
+  neighbours:
+2018-12-26 16:44:25 =SUPERVISOR REPORT====
+     Supervisor: {<0.461.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.462.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:46033 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:44:25 =SUPERVISOR REPORT====
+     Supervisor: {<0.461.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.462.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:46033 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:48:50 =ERROR REPORT====
+** Generic server <0.419.0> terminating
+** Last message in was {consumer_call,{'basic.cancel_ok',<<"amq.ctag-j3Mnle-BvHCajO-Ie59AEw">>},{'basic.cancel',<<"amq.ctag-j3Mnle-BvHCajO-Ie59AEw">>,false}}
+** When Server state == {state,amqp_selective_consumer,{state,#{},undefined,#{},none}}
+** Reason for termination == 
+** unexpected_delivery_and_no_default_consumer
+2018-12-26 16:48:50 =CRASH REPORT====
+  crasher:
+    initial call: amqp_gen_consumer:init/1
+    pid: <0.419.0>
+    registered_name: []
+    exception exit: {unexpected_delivery_and_no_default_consumer,[{gen_server2,terminate,3,[{file,"/home/mbohoslavskyi/elixir/elixir_tryout/deps/rabbit_common/src/gen_server2.erl"},{line,1166}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.418.0>,<0.412.0>,<0.410.0>,<0.409.0>,amqp_sup,<0.290.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.418.0>]
+    dictionary: [{process_name,{amqp_gen_consumer,{<<"client 127.0.0.1:34743 -> 127.0.0.1:5672">>,1}}}]
+    trap_exit: false
+    status: running
+    heap_size: 1598
+    stack_size: 27
+    reductions: 2884
+  neighbours:
+2018-12-26 16:48:50 =SUPERVISOR REPORT====
+     Supervisor: {<0.418.0>,amqp_channel_sup}
+     Context:    child_terminated
+     Reason:     unexpected_delivery_and_no_default_consumer
+     Offender:   [{pid,<0.419.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:34743 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
+2018-12-26 16:48:50 =SUPERVISOR REPORT====
+     Supervisor: {<0.418.0>,amqp_channel_sup}
+     Context:    shutdown
+     Reason:     reached_max_restart_intensity
+     Offender:   [{pid,<0.419.0>},{name,gen_consumer},{mfargs,{amqp_gen_consumer,start_link,[amqp_selective_consumer,[],{<<"client 127.0.0.1:34743 -> 127.0.0.1:5672">>,1}]}},{restart_type,intrinsic},{shutdown,30000},{child_type,worker}]
+
