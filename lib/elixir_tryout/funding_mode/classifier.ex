@@ -21,18 +21,19 @@ defmodule ElixirTryout.FundingMode.Classifier do
 
   def identify_funding_mode(funding_type \\ @prohibited, funds_originator, account, house_account) do
     if funding_type == @prohibited do
-        nil
-      else
-        cond funding_type do
-          funding_type == @receipts -> if account.client?, do: @from_client else: @obo_client
-          funding_type == @collections ->
-            if nested_payments_with_collections?(funds_originator, account, house_account), do: @from_client else: @obo_client
-        end
+      nil
+    else
+      cond funding_type do
+        funding_type == @receipts -> if account.client?, do: @from_client, else: @obo_client
+        funding_type == @collections ->
+          if nested_payments_with_collections?(funds_originator, account, house_account),
+             do: @from_client, else: @obo_client
+      end
     end
   end
 
   defp nested_payments_with_collections?(sender, account, house_account) do
-    is_regulated = if house_account do: house_account.regulated? else: account.regulated?
+    is_regulated = if house_account, do: house_account.regulated?, else: account.regulated?
 
     is_regulated && account.client? &&
       (sender.not_account_holder? || sender.approved_funding_partner?)
