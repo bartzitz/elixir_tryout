@@ -2,13 +2,11 @@ defmodule RabbitMQTest do
   use ExUnit.Case
 
   test "receives a message from RabbitMQ" do
+    RabbitMQ.start_link()
     RabbitMQ.start_consumers()
-
-    for _ <- 1..10 do
-      RabbitMQ.send_test_message()
-    end
+    RabbitMQ.send_test_message()
 
     IO.puts "Waiting..."
-    :timer.sleep(6000)
+    :timer.sleep(1000)
   end
 end

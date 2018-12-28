@@ -23,6 +23,15 @@ defmodule RabbitMQ do
     "funds_engine.calculatate_gbp_equivalent"
   ]
 
+  def start_link do
+    DynamicSupervisor.start_link(__MODULE__, [], name: __MODULE__)
+  end
+
+  @impl true
+  def init(_arg) do
+    DynamicSupervisor.init(strategy: :one_for_one)
+  end
+
   def start_consumers do
     {:ok, conn} = Connection.open(@url)
     {:ok, channel} = Channel.open(conn)
@@ -34,21 +43,58 @@ defmodule RabbitMQ do
       {:ok, _consumer_tag} = Queue.subscribe(channel, queue, &process_message/2)
     end
 
-    IO.puts "Waiting for messages ..."
+    IO.puts "Supervisor: waiting for messages ..."
   end
 
   def send_test_message do
     {:ok, conn} = Connection.open(@url)
     {:ok, channel} = Channel.open(conn)
 
-    message = %{test: "message", status: "success"}
-    {:ok, json} = Jason.encode(message)
-    :ok = Basic.publish(channel, @exchange, "", json)
+    for i <- 1..3 do
+      message = %{index: i, test: "message"}
+      {:ok, json} = Jason.encode(message)
+      :ok = Basic.publish(channel, @exchange, "", json)
+    end
   end
 
-  def process_message(payload, _meta) do
-    IO.puts "Received message: #{payload}"
+  def process_message(payload, meta) do
+    IO.puts "Supervisor: received message: #{payload}"
+
+    {:ok, pid} = DynamicSupervisor.start_child(__MODULE__, RabbitMQ.Worker)
+    RabbitMQ.Worker.handle_message(pid, payload, meta)
+  end
+end
+
+defmodule RabbitMQ.Worker do
+  use GenServer
+
+  # Client API
+  def start_link(_args) do
+    GenServer.start_link(__MODULE__, [], [])
+  end
+
+  def handle_message(pid, payload, meta) do
+    GenServer.cast(pid, {:handle_message, payload, meta})
+  end
+
+  # Server API
+  def init(args) do
+    IO.puts "Worker: starting"
+
+    Process.flag(:trap_exit, true)
+    {:ok, args}
+  end
+
+  def handle_cast({:handle_message, payload, _meta}, state) do
+    IO.puts "Worker: started handling message: #{payload}"
     :timer.sleep(2000)
-    IO.puts "Processed message: #{payload}"
+    IO.puts "Worker: finished handling message: #{payload}"
+
+    {:noreply, state}
+  end
+
+  def terminate(reason, _state) do
+    IO.puts "Worker: terminating: #{inspect self()}: #{inspect reason}"
+    :ok
   end
 end
