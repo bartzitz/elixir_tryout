@@ -9,12 +9,19 @@ defmodule ElixirTryout.Classifier do
 
   def calculate_funding_type(account, house_account, sender) do
     cond do
-      no_compliance_relationship?(account, house_account) ||
-        nested_payments_with_collections?(account, house_account, sender) ||
-          regulated_affiliate_receipts?(account, house_account) ->
+      no_compliance_relationship?(account, house_account) ->
         "prohibited"
 
-      not_account_holder?(sender) || corporate_collections?(account, house_account, sender) ->
+      nested_payments_with_collections?(account, house_account, sender) ->
+        "prohibited"
+
+      regulated_affiliate_receipts?(account, house_account) ->
+        "prohibited"
+
+      not_account_holder?(sender) ->
+        "collections"
+
+      corporate_collections?(account, house_account, sender) ->
         "collections"
 
       sender.classification == "account_holder" ->
