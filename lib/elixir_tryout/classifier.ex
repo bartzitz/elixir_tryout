@@ -11,11 +11,10 @@ defmodule ElixirTryout.Classifier do
     cond do
       no_compliance_relationship?(account, house_account) ||
         nested_payments_with_collections?(account, house_account, sender) ||
-        regulated_affiliate_receipts?(account, house_account) ->
+          regulated_affiliate_receipts?(account, house_account) ->
         "prohibited"
 
-      not_account_holder?(sender) ||
-        corporate_collections?(account, house_account, sender) ->
+      not_account_holder?(sender) || corporate_collections?(account, house_account, sender) ->
         "collections"
 
       sender.classification == "account_holder" ->
@@ -55,6 +54,7 @@ defmodule ElixirTryout.Classifier do
   def no_compliance_relationship?(account, nil) do
     account.compliance_relationship == "non-client"
   end
+
   def no_compliance_relationship?(account, house_account) do
     account.compliance_relationship == "non-client" &&
       house_account.compliance_relationship == "non-client"
@@ -64,6 +64,7 @@ defmodule ElixirTryout.Classifier do
     account.compliance_relationship == "client" && account.regulated_service == "regulated" &&
       not_account_holder?(sender)
   end
+
   def nested_payments_with_collections?(account, house_account, sender) do
     account.compliance_relationship == "client" && house_account.regulated_service == "regulated" &&
       not_account_holder?(sender)
@@ -72,6 +73,7 @@ defmodule ElixirTryout.Classifier do
   def regulated_affiliate_receipts?(account, nil) do
     false
   end
+
   def regulated_affiliate_receipts?(account, house_account) do
     account.compliance_relationship == "client" &&
       house_account.compliance_relationship == "non-client" &&
@@ -81,6 +83,7 @@ defmodule ElixirTryout.Classifier do
   def corporate_collections?(account, nil, sender) do
     false
   end
+
   def corporate_collections?(account, house_account, sender) do
     account.compliance_relationship == "non-client" &&
       house_account.compliance_relationship == "client" &&
@@ -91,11 +94,11 @@ defmodule ElixirTryout.Classifier do
   def nested_collections?(account, nil, sender) do
     false
   end
+
   def nested_collections?(account, house_account, sender) do
     account.compliance_relationship == "non-client" &&
       house_account.compliance_relationship == "client" &&
-      house_account.regulated_service == "regulated" &&
-      not_account_holder?(sender)
+      house_account.regulated_service == "regulated" && not_account_holder?(sender)
   end
 end
 
