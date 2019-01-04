@@ -76,25 +76,24 @@ defmodule ElixirTryout.Classifier do
     end
   end
 
-  def calculate_funding_mode(funding_type, account, house_account, sender) do
-    case funding_type do
-      "receipts" ->
-        if account.client? do
-          "from_client"
-        else
-          "obo_client"
-        end
-
-      "collections" ->
-        if nested_collections?(account, house_account, sender) do
-          "obo_clients_customer"
-        else
-          "obo_client"
-        end
-
-      _ ->
-        nil
+  def calculate_funding_mode("receipts", account, _house_account, _sender) do
+    if account.client? do
+      "from_client"
+    else
+      "obo_client"
     end
+  end
+
+  def calculate_funding_mode("collections", account, house_account, sender) do
+    if nested_collections?(account, house_account, sender) do
+      "obo_clients_customer"
+    else
+      "obo_client"
+    end
+  end
+
+  def calculate_funding_mode(_, _account, _house_account, _sender) do
+    nil
   end
 
   def no_compliance_relationship?(account, nil) do
