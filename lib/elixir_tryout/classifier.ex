@@ -112,7 +112,7 @@ defmodule ElixirTryout.Classifier do
     account.client? && house_account.regulated? && sender.not_account_holder?
   end
 
-  def regulated_affiliate_receipts?(account, nil) do
+  def regulated_affiliate_receipts?(_account, nil) do
     false
   end
 
@@ -120,7 +120,7 @@ defmodule ElixirTryout.Classifier do
     account.client? && house_account.non_client? && house_account.regulated?
   end
 
-  def corporate_collections?(account, nil, sender) do
+  def corporate_collections?(_account, nil, _sender) do
     false
   end
 
@@ -129,7 +129,7 @@ defmodule ElixirTryout.Classifier do
       sender.account_holder?
   end
 
-  def nested_collections?(account, nil, sender) do
+  def nested_collections?(_account, nil, _sender) do
     false
   end
 
