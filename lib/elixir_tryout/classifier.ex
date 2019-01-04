@@ -1,7 +1,51 @@
+defmodule ElixirTryout.AccountClassification do
+  defstruct [:compliance_relationship, :regulated_service]
+end
+
+defmodule ElixirTryout.Sender do
+  defstruct [:classification]
+end
+
+defmodule ElixirTryout.MappedAccount do
+  defstruct [:client?, :non_client?, :regulated?, :unregulated?]
+
+  def map_from(nil) do
+    nil
+  end
+
+  def map_from(account) do
+    %ElixirTryout.MappedAccount{
+      client?: account.compliance_relationship == "client",
+      non_client?: account.compliance_relationship == "non-client",
+      regulated?: account.regulated_service == "regulated",
+      unregulated?: account.regulated_service == "unregulated"
+    }
+  end
+end
+
+defmodule ElixirTryout.MappedSender do
+  defstruct [:account_holder?, :not_account_holder?]
+
+  def map_from(sender) do
+    %ElixirTryout.MappedSender{
+      account_holder?: sender.classification == "account_holder",
+      not_account_holder?:
+        sender.classification == "not_account_holder" ||
+          sender.classification == "approved_funding_partner"
+    }
+  end
+end
+
 defmodule ElixirTryout.Classifier do
-  def classify(account, house_account, sender) do
-    funding_type = calculate_funding_type(account, house_account, sender)
-    funding_mode = calculate_funding_mode(funding_type, account, house_account, sender)
+  alias ElixirTryout.{MappedAccount, MappedSender}
+
+  def classify(account_classification, house_account_classification, sender) do
+    account = MappedAccount.map_from(account_classification)
+    house_account = MappedAccount.map_from(house_account_classification)
+    mapped_sender = MappedSender.map_from(sender)
+
+    funding_type = calculate_funding_type(account, house_account, mapped_sender)
+    funding_mode = calculate_funding_mode(funding_type, account, house_account, mapped_sender)
     full_funding_mode = if funding_mode, do: "#{funding_type}_#{funding_mode}"
 
     {funding_type, full_funding_mode}
@@ -18,13 +62,13 @@ defmodule ElixirTryout.Classifier do
       regulated_affiliate_receipts?(account, house_account) ->
         "prohibited"
 
-      not_account_holder?(sender) ->
+      sender.not_account_holder? ->
         "collections"
 
       corporate_collections?(account, house_account, sender) ->
         "collections"
 
-      sender.classification == "account_holder" ->
+      sender.account_holder? ->
         "receipts"
 
       true ->
@@ -35,7 +79,7 @@ defmodule ElixirTryout.Classifier do
   def calculate_funding_mode(funding_type, account, house_account, sender) do
     case funding_type do
       "receipts" ->
-        if account.compliance_relationship == "client" do
+        if account.client? do
           "from_client"
         else
           "obo_client"
@@ -53,28 +97,20 @@ defmodule ElixirTryout.Classifier do
     end
   end
 
-  def not_account_holder?(sender) do
-    sender.classification == "not_account_holder" ||
-      sender.classification == "approved_funding_partner"
-  end
-
   def no_compliance_relationship?(account, nil) do
-    account.compliance_relationship == "non-client"
+    account.non_client?
   end
 
   def no_compliance_relationship?(account, house_account) do
-    account.compliance_relationship == "non-client" &&
-      house_account.compliance_relationship == "non-client"
+    account.non_client? && house_account.non_client?
   end
 
   def nested_payments_with_collections?(account, nil, sender) do
-    account.compliance_relationship == "client" && account.regulated_service == "regulated" &&
-      not_account_holder?(sender)
+    account.client? && account.regulated? && sender.not_account_holder?
   end
 
   def nested_payments_with_collections?(account, house_account, sender) do
-    account.compliance_relationship == "client" && house_account.regulated_service == "regulated" &&
-      not_account_holder?(sender)
+    account.client? && house_account.regulated? && sender.not_account_holder?
   end
 
   def regulated_affiliate_receipts?(account, nil) do
@@ -82,9 +118,7 @@ defmodule ElixirTryout.Classifier do
   end
 
   def regulated_affiliate_receipts?(account, house_account) do
-    account.compliance_relationship == "client" &&
-      house_account.compliance_relationship == "non-client" &&
-      house_account.regulated_service == "regulated"
+    account.client? && house_account.non_client? && house_account.regulated?
   end
 
   def corporate_collections?(account, nil, sender) do
@@ -92,10 +126,8 @@ defmodule ElixirTryout.Classifier do
   end
 
   def corporate_collections?(account, house_account, sender) do
-    account.compliance_relationship == "non-client" &&
-      house_account.compliance_relationship == "client" &&
-      house_account.regulated_service == "unregulated" &&
-      sender.classification == "account_holder"
+    account.non_client? && house_account.client? && house_account.unregulated? &&
+      sender.account_holder?
   end
 
   def nested_collections?(account, nil, sender) do
@@ -103,16 +135,7 @@ defmodule ElixirTryout.Classifier do
   end
 
   def nested_collections?(account, house_account, sender) do
-    account.compliance_relationship == "non-client" &&
-      house_account.compliance_relationship == "client" &&
-      house_account.regulated_service == "regulated" && not_account_holder?(sender)
+    account.non_client? && house_account.client? && house_account.regulated? &&
+      sender.not_account_holder?
   end
-end
-
-defmodule ElixirTryout.AccountClassification do
-  defstruct [:compliance_relationship, :regulated_service]
-end
-
-defmodule ElixirTryout.Sender do
-  defstruct [:classification]
 end
