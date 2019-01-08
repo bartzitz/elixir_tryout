@@ -1,4 +1,42 @@
+defmodule ElixirTryout.FundingMode.Account do
+  defstruct [:compliance_relationship, :regulated_service]
+end
+
+defmodule ElixirTryout.FundingMode.AccountClassification do
+  alias ElixirTryout.FundingMode.Account
+  defstruct [:client?, :non_client?, :regulated?, :unregulated?]
+
+  def client?(%Account{} = account) do
+    account.compliance_relationship == "client"
+  end
+
+  def non_client?(%Account{} = account) do
+    account.compliance_relationship == "non-client"
+  end
+
+  def regulated?(%Account{} = account) do
+    account.regulated_service == "regulated"
+  end
+
+  def unregulated?(%Account{} = account) do
+    account.regulated_service == "unregulated"
+  end
+
+  # @todo: refactor to use with pipe ||>
+  def to_map(%Account{} = account) do
+    %{
+      client?: client?(account),
+      non_client?: non_client?(account),
+      regulated?: regulated?(account),
+      unregulated?: unregulated?(account)
+    }
+  end
+end
+
+
 defmodule ElixirTryout.FundingMode.Classifier do
+  alias __MODULE__
+
   @prohibited :prohibited
   @collections :collections
   @receipts :receipts
@@ -7,35 +45,43 @@ defmodule ElixirTryout.FundingMode.Classifier do
   @obo_client :obo_client
   @obo_client_customer :obo_client_customer
 
-  def classify(funds_originator, account, house_account) do
-    funding_type = identify_funding_type(funds_originator, account, house_account)
+  defstruct [:sender, :account, :house_account]
 
-    funding_mode = funding_type |> identify_funding_mode()
+  def classify(%Classifier{} = context) do
+    funding_type = identify_funding_type(context)
+    require IEx; IEx.pry
+
+    funding_mode = if funding_type != @prohibited, do: identify_funding_mode(funding_type, context), else: nil
+
 
     %{funding_type: funding_type, funding_mode: funding_mode}
   end
 
-  def identify_funding_type(funds_originator, account, house_account) do
-    "collections" # @todo: HARDCODED
+  def identify_funding_type(_context) do
+    :collections # @todo: HARDCODED
   end
 
-  def identify_funding_mode(funding_type \\ @prohibited, funds_originator, account, house_account) do
-    if funding_type == @prohibited do
+  def identify_funding_mode(funding_type, context) do
+    funding_mode = if funding_type == @prohibited do
       nil
     else
-      cond funding_type do
-        funding_type == @receipts -> if account.client?, do: @from_client, else: @obo_client
-        funding_type == @collections ->
-          if nested_payments_with_collections?(funds_originator, account, house_account),
-             do: @from_client, else: @obo_client
+      cond do
+        funding_type == @receipts -> if context.account.client?, do: @from_client, else: @obo_client
+        funding_type == @collections -> if nested_payments_with_collections?(context), do: @obo_client_customer, else: @obo_client
       end
     end
+
+    "#" <> funding_type <> "_#" <> funding_mode
   end
 
-  defp nested_payments_with_collections?(sender, account, house_account) do
-    is_regulated = if house_account, do: house_account.regulated?, else: account.regulated?
+  defp no_compliance_relationship?(context) do
+    context.account.non_client? && (!context.house_account || context.house_account.non_client?)
+  end
 
-    is_regulated && account.client? &&
-      (sender.not_account_holder? || sender.approved_funding_partner?)
+  defp nested_payments_with_collections?(context) do
+    is_regulated = if context.house_account, do: context.house_account.regulated?, else: context.account.regulated?
+
+    is_regulated && context.account.client? &&
+      (context.sender.not_account_holder? || context.sender.approved_funding_partner?)
   end
 end
