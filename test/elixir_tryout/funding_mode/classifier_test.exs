@@ -1,7 +1,7 @@
 defmodule ElixirTryout.WebAdaptors.ClassifierTest do
   use ExUnit.Case
 
-  test "#classify" do
+  test "#classify (generally works well)" do
     funds_originator = %ElixirTryout.FundsOriginator{
       free_text: "ololo",
       name: "name",
@@ -30,8 +30,7 @@ defmodule ElixirTryout.WebAdaptors.ClassifierTest do
     %{funding_type: ft, funding_mode: fm} = ElixirTryout.FundingMode.Classifier.classify(context)
 #    require IEx; IEx.pry
 
-    assert ft == :collections
-    assert fm == :from_clients
+    assert ft == "collections"
+    assert fm == "collections_obo_client"
   end
 end
-

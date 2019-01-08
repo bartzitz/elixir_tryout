@@ -49,12 +49,9 @@ defmodule ElixirTryout.FundingMode.Classifier do
 
   def classify(%Classifier{} = context) do
     funding_type = identify_funding_type(context)
-    require IEx; IEx.pry
+    funding_mode = funding_type |> identify_funding_mode(context)
 
-    funding_mode = if funding_type != @prohibited, do: identify_funding_mode(funding_type, context), else: nil
-
-
-    %{funding_type: funding_type, funding_mode: funding_mode}
+    %{funding_type: Atom.to_string(funding_type), funding_mode: funding_mode}
   end
 
   def identify_funding_type(_context) do
@@ -62,16 +59,13 @@ defmodule ElixirTryout.FundingMode.Classifier do
   end
 
   def identify_funding_mode(funding_type, context) do
-    funding_mode = if funding_type == @prohibited do
-      nil
-    else
-      cond do
-        funding_type == @receipts -> if context.account.client?, do: @from_client, else: @obo_client
-        funding_type == @collections -> if nested_payments_with_collections?(context), do: @obo_client_customer, else: @obo_client
-      end
+    funding_mode = case funding_type do
+      @prohibited -> nil
+      @receipts -> if context.account.client?, do: @from_client, else: @obo_client
+      @collections -> if nested_payments_with_collections?(context), do: @obo_client_customer, else: @obo_client
     end
 
-    "#" <> funding_type <> "_#" <> funding_mode
+    "#{funding_type}_#{funding_mode}"
   end
 
   defp no_compliance_relationship?(context) do
