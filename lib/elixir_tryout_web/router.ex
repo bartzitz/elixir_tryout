@@ -3,10 +3,16 @@ defmodule ElixirTryoutWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ElixirTryoutWeb.PrincipalIdentifierChecker
   end
+
+  # pipeline :principle_identifier_check do
+  #   plug ElixirTryoutWeb.PrincipalIdentifierChecker
+  # end
 
   scope "/api", ElixirTryoutWeb do
     pipe_through :api
+    # pipe_through [:api, :principle_identifier_check]
 
     get "/", RootController, :index
 
