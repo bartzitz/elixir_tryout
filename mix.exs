@@ -42,7 +42,8 @@ defmodule ElixirTryout.MixProject do
       {:jason, "~> 1.0"},
       {:httpoison, "~> 1.4"},
       {:plug_cowboy, "~> 2.0"},
-      {:amqp, "~> 1.0"}
+      {:amqp, "~> 1.0"},
+      {:fsm, "~> 0.3.1"}
     ]
   end
 
