@@ -11,7 +11,8 @@ defmodule ElixirTryout.Application do
       # Start the Ecto repository
       ElixirTryout.Repo,
       # Start the endpoint when the application starts
-      ElixirTryoutWeb.Endpoint
+      ElixirTryoutWeb.Endpoint,
+      Messaging.ConnectionManager,
       # Starts a worker by calling: ElixirTryout.Worker.start_link(arg)
       # {ElixirTryout.Worker, arg},
     ]
