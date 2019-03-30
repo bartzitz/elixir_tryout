@@ -3,6 +3,8 @@ defmodule Messaging.Consumer do
   use AMQP
   require Logger
 
+  @reconnect_timeout 1000
+
   defstruct [:channel, :consumer_tag, :exchange, :queue, :handler_fn]
 
   def start_link(exchange, queue, handler_fn) do
@@ -11,41 +13,74 @@ defmodule Messaging.Consumer do
   end
 
   def init(state) do
-    Logger.debug("Messaging: Consumer.init")
-    Logger.info("Messaging: opening channel for #{state.queue}")
+    get_channel()
 
-    # Process.flag(:trap_exit, true)
-
-    Messaging.ConnectionManager.get_channel(self())
     {:ok, state}
   end
 
-  def handle_cast({:channel_opened, channel}, %{exchange: exchange, queue: queue} = state) do
-    Process.link(channel.pid)
+  def channel_opened(pid, channel) do
+    GenServer.cast(pid, {:channel_opened, channel})
+  end
+
+  def channel_failed(pid) do
+    GenServer.cast(pid, {:channel_failed})
+  end
+
+  defp get_channel() do
+    Messaging.ConnectionManager.get_channel(self())
+  end
+
+  defp subscribe_to_queue(channel, exchange, queue, handler_fn) do
+    Process.monitor(channel.pid)
 
     :ok = Exchange.direct(channel, exchange, exchange_options())
     {:ok, _} = Queue.declare(channel, queue, queue_options())
     :ok = Queue.bind(channel, queue, exchange)
-    {:ok, consumer_tag} = Queue.subscribe(channel, queue, state.handler_fn)
+    {:ok, consumer_tag} = Queue.subscribe(channel, queue, handler_fn)
+
     Logger.info("Messaging: started consumer #{consumer_tag} on #{queue}")
+
+    {:ok, consumer_tag}
+  end
+
+  def handle_cast({:channel_opened, channel}, state) do
+    Logger.info("Messaging: channel opened for #{state.queue}")
+
+    {:ok, consumer_tag} =
+      subscribe_to_queue(channel, state.exchange, state.queue, state.handler_fn)
 
     {:noreply, %{state | channel: channel, consumer_tag: consumer_tag}}
   end
 
+  def handle_cast({:channel_failed}, state) do
+    Logger.warn("Messaging: failed to open channel for #{state.queue}, retrying...")
+    :timer.sleep(@reconnect_timeout)
+    get_channel()
+
+    {:noreply, state}
+  end
+
   def handle_info({:DOWN, _ref, :process, object, reason}, state) do
-    Logger.info("Messaging: DOWN consumer error #{inspect object} #{inspect reason}")
+    Logger.warn("Messaging: channel went down #{inspect(object)} #{inspect(reason)}")
+    :timer.sleep(@reconnect_timeout)
+    get_channel()
+
     {:noreply, state}
   end
 
-  def handle_info({:EXIT, _pid, reason}, state) do
-    Logger.info("Messaging: EXIT consumer error #{inspect reason}")
-    Process.exit(self(), :kill)
-    {:noreply, state}
-  end
+  #  def cancel_consumer(channel, consumer_tag) do
+  #    Basic.cancel(channel, consumer_tag)
+  #  end
 
-  def terminate(reason, _state) do
-    Logger.info("Messaging: consumer shutting down gracefully... #{inspect reason}")
-  end
+  #  def handle_info({:EXIT, _pid, reason}, state) do
+  #    Logger.info("Messaging: EXIT consumer error #{inspect(reason)}")
+  #    Process.exit(self(), :kill)
+  #    {:noreply, state}
+  #  end
+  #
+  #  def terminate(reason, _state) do
+  #    Logger.info("Messaging: consumer shutting down gracefully... #{inspect(reason)}")
+  #  end
 
   def exchange_options do
     [
@@ -66,13 +101,4 @@ defmodule Messaging.Consumer do
       exclusive: false
     ]
   end
-
-  def cancel_consumer(channel, consumer_tag) do
-    Basic.cancel(channel, consumer_tag)
-  end
-
-  # def handle_info(args, state) do
-  #   Logger.info("==== Got process message: #{inspect(args)}")
-  #   {:noreply, state}
-  # end
 end

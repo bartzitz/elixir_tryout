@@ -13,6 +13,7 @@ defmodule ElixirTryout.Application do
       # Start the endpoint when the application starts
       ElixirTryoutWeb.Endpoint,
       Messaging.ConnectionManager,
+      Messaging.ConsumerSupervisor,
       # Starts a worker by calling: ElixirTryout.Worker.start_link(arg)
       # {ElixirTryout.Worker, arg},
     ]
