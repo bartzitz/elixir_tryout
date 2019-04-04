@@ -7,6 +7,8 @@ defmodule ElixirTryout.Transaction do
   schema "transactions" do
     field :amount, :decimal
     field :currency, :string
+    field :funding_type, :string
+    field :funding_mode, :string
 
     timestamps()
   end
@@ -14,7 +16,7 @@ defmodule ElixirTryout.Transaction do
   @doc false
   def changeset(transaction, attrs) do
     transaction
-    |> cast(attrs, [:amount, :currency])
+    |> cast(attrs, [:amount, :currency, :funding_type, :funding_mode])
     |> validate_required([:amount, :currency])
   end
 end
