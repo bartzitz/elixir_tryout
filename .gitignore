@@ -39,3 +39,4 @@ elixir_tryout-*.tar
 .vscode/
 .idea
 *.iml
+/log/
