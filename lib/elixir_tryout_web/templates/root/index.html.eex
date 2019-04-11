@@ -1,0 +1,51 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Client</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Provider account</th>
+      <th scope="col" class="text-right" style="width: 10em">Amount</th>
+      <th scope="col" class="text-right" style="width: 8em">Value date</th>
+      <th scope="col" class="text-right" style="width: 8em">Created on</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a href="#">Azimo ltd</a>
+      </td>
+      <td>
+        Random guy
+        <span class="badge badge-secondary">Unknown</span>
+      </td>
+      <td>Barclays client</td>
+      <td class="text-right">1005000.00 EUR</td>
+      <td class="text-right">11 Apr 19</td>
+      <td class="text-right">11 Apr 19</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#">Earhtport</a>
+        <span class="badge badge-danger">Disabled</span>
+      </td>
+      <td>-</td>
+      <td>CFSB client</td>
+      <td class="text-right">1500.00 USD</td>
+      <td class="text-right">11 Apr 19</td>
+      <td class="text-right">11 Apr 19</td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#">Azimo ltd</a>
+      </td>
+      <td>
+        Proper company
+        <span class="badge badge-success">Approved</span>
+      </td>
+      <td>Barclays client</td>
+      <td class="text-right">1000.00 PLN</td>
+      <td class="text-right">11 Apr 19</td>
+      <td class="text-right">11 Apr 19</td>
+    </tr>
+  </tbody>
+</table>
