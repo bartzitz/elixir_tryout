@@ -1,0 +1,90 @@
+<nav class="filter-sidebar mr-3">
+  <div class="sidebar-header d-flex align-items-baseline">
+    <span class="h5 mr-auto">Filters</span>
+    <a href="#" class="small">clear all</a>
+  </div>
+
+  <form>
+    <ul class="list-unstyled components">
+      <li class="active">
+        <div class="form-group">
+          <label for="client">Client</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <input type="text" class="form-control" id="client" />
+        </div>
+      </li>
+      <li>
+        <div class="form-group">
+          <label for="sender">Sender</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <input type="text" class="form-control" id="sender" />
+        </div>
+      </li>
+      <li>
+        <div class="form-group">
+          <label for="sender-status">Sender status</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <select class="custom-select">
+            <option selected>Any</option>
+            <option value="1">Unchecked</option>
+            <option value="2">Compliance check</option>
+            <option value="3">Approved</option>
+            <option value="4">Rejected</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="form-group">
+          <label for="provider">Provider</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <select class="custom-select" id="provider">
+            <option selected>Any</option>
+            <option value="1">Arkea</option>
+            <option value="2">Barclays</option>
+            <option value="3">CFSB</option>
+            <option value="4">SEB</option>
+          </select>
+        </div>
+      </li>
+      <li>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" id="amount" placeholder="From" />
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" id="amount-to" placeholder="To" />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <select class="custom-select" id="currency">
+            <option selected>Any</option>
+            <option value="1">GBP</option>
+            <option value="2">EUR</option>
+            <option value="3">USD</option>
+            <option value="4">PLN</option>
+          </select>
+        </div>
+      </li>
+    </ul>
+  </form>
+</nav>

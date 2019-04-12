@@ -1,51 +1,87 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Client</th>
-      <th scope="col">Sender</th>
-      <th scope="col">Provider account</th>
-      <th scope="col" class="text-right" style="width: 10em">Amount</th>
-      <th scope="col" class="text-right" style="width: 8em">Value date</th>
-      <th scope="col" class="text-right" style="width: 8em">Created on</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <a href="#">Azimo ltd</a>
-      </td>
-      <td>
-        Random guy
-        <span class="badge badge-secondary">Unknown</span>
-      </td>
-      <td>Barclays client</td>
-      <td class="text-right">1005000.00 EUR</td>
-      <td class="text-right">11 Apr 19</td>
-      <td class="text-right">11 Apr 19</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#">Earhtport</a>
-        <span class="badge badge-danger">Disabled</span>
-      </td>
-      <td>-</td>
-      <td>CFSB client</td>
-      <td class="text-right">1500.00 USD</td>
-      <td class="text-right">11 Apr 19</td>
-      <td class="text-right">11 Apr 19</td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#">Azimo ltd</a>
-      </td>
-      <td>
-        Proper company
-        <span class="badge badge-success">Approved</span>
-      </td>
-      <td>Barclays client</td>
-      <td class="text-right">1000.00 PLN</td>
-      <td class="text-right">11 Apr 19</td>
-      <td class="text-right">11 Apr 19</td>
-    </tr>
-  </tbody>
-</table>
+<div class="d-flex align-items-stretch">
+  <%= render ElixirTryoutWeb.RootView, "_filter_sidebar.html" %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="border-top-0" style="width: 3em;"></th>
+        <th scope="col" class="border-top-0">Client</th>
+        <th scope="col" class="border-top-0">Sender</th>
+        <th scope="col" class="border-top-0">Provider account</th>
+        <th scope="col" class="border-top-0 text-right" style="width: 10em">Amount</th>
+        <th scope="col" class="border-top-0 text-right" style="width: 8em">Value date</th>
+        <th scope="col" class="border-top-0 text-right" style="width: 8em">Created on</th>
+        <th class="border-top-0" style="width: 6em"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for {item, i} <- Enum.with_index(@transactions) do %>
+      <tr>
+        <td>
+          <button type="button" data-toggle="collapse" href="#transaction-details-<%= i %>" class="btn btn-sm btn-outline-secondary">...</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-secondary btn-sm btn-hover float-right">Edit</button>
+          <a href="#"><%= item.client %></a><br/>
+          <%= unless item.client_enabled do %>
+            <span class="badge badge-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td>
+          <%= item.sender %><br/>
+          <span class="badge <%= item.sender_css %>"><%= item.sender_status %></span>
+        </td>
+        <td><%= item.account %></td>
+        <td class="text-right"><%= item.amount %> <%= item.currency %></td>
+        <td class="text-right"><%= item.value_date %></td>
+        <td class="text-right"><%= item.created_on %></td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+            Action
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item <%= if approval_disabled(item) do %>disabled<% end %>" href="#">Approve</a>
+              <a class="dropdown-item" href="#">Return</a>
+              <a class="dropdown-item" href="#">Mark as returned</a>
+              <a class="dropdown-item" href="#">Mark as cancelled</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Send to support</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr class="bg-light transaction-details collapse" id="transaction-details-<%= i %>">
+        <td colspan="8">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="p-2">
+            <b>Transaction audit</b>
+            <ul class="audit">
+              <li><b>Operator</b> approved <span class="text-muted">11 Apr 19 10:15</span></li>
+              <li><b>Operator</b> changed client to Azimo ltd <span class="text-muted">11 Apr 19 10:15</span></li>
+              <li><b>System</b> matched to Client <span class="text-muted">11 Apr 19 09:10</span></li>
+              <li><b>System</b> classified as client money <span class="text-muted">11 Apr 19 09:10</span></li>
+            </ul>
+          </div>
+          <div class="p-2">
+          <b>Virtual account</b><br/>
+          111222333444555<br/>
+          <b>Sender account</b><br/>
+          122128874344<br/>
+          <b>Sender BIC</b><br/>
+          BARGB22<br/>
+          </div>
+          <div class="p-2">
+            <pre>:61:1406090609D1062,12FTRF140609-YHHCFV001//PET655054160
+Withdrawal To Bank Account
+:86:051?00 ?20Withdrawal To Bank Account ?21        Trade Ref: 2
+09?22-YHHCFV?30HSBCHKHHHKH?31561799768838?32SINOFIT CORPORATION
+IMITED?33HK?35TCC USD - PAYONEER SETTLEME?36NT ACC  THE DIRECTOR</pre>
+            <pre><b>UUID</b> 6f4690ee-dc7b-4809-bd93-f4e8a08aa72f</pre>
+          </div>
+        </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
