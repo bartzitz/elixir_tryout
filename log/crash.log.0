@@ -1,0 +1,31 @@
+2018-12-27 11:22:10 =ERROR REPORT====
+** Generic server <0.377.0> terminating 
+** Last message in was {'$gen_cast',increment}
+** When Server state == <<"mike">>
+** Reason for termination == 
+** {badarith,[{'Elixir.WorkersManager',handle_cast,2,[{file,"lib/rabbitmq_integration/workers_manager.ex"},{line,21}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,637}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,711}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+2018-12-27 11:22:10 =CRASH REPORT====
+  crasher:
+    initial call: Elixir.WorkersManager:init/1
+    pid: <0.377.0>
+    registered_name: []
+    exception error: {badarith,[{'Elixir.WorkersManager',handle_cast,2,[{file,"lib/rabbitmq_integration/workers_manager.ex"},{line,21}]},{gen_server,try_dispatch,4,[{file,"gen_server.erl"},{line,637}]},{gen_server,handle_msg,6,[{file,"gen_server.erl"},{line,711}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}
+    ancestors: [<0.372.0>,<0.72.0>]
+    message_queue_len: 0
+    messages: []
+    links: [<0.372.0>]
+    dictionary: []
+    trap_exit: false
+    status: running
+    heap_size: 4185
+    stack_size: 27
+    reductions: 33496
+  neighbours:
+    neighbour: [{pid,<0.375.0>},{registered_name,[]},{initial_call,{'Elixir.WorkersManager',init,['Argument__1']}},{current_function,{gen_server,loop,7}},{ancestors,[<0.372.0>,<0.72.0>]},{message_queue_len,0},{links,[<0.372.0>]},{trap_exit,false},{status,waiting},{heap_size,233},{stack_size,10},{reductions,36},{current_stacktrace,[{gen_server,loop,7,[{file,"gen_server.erl"},{line,403}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}]
+    neighbour: [{pid,<0.372.0>},{registered_name,[]},{initial_call,{'Elixir.IEx.Evaluator',init,['Argument__1','Argument__2','Argument__3','Argument__4']}},{current_function,{'Elixir.IEx.Evaluator',loop,1}},{ancestors,[<0.72.0>]},{message_queue_len,0},{links,[<0.375.0>,<0.377.0>]},{trap_exit,false},{status,waiting},{heap_size,4185},{stack_size,15},{reductions,14729},{current_stacktrace,[{'Elixir.IEx.Evaluator',loop,1,[{file,"lib/iex/evaluator.ex"},{line,92}]},{'Elixir.IEx.Evaluator',init,4,[{file,"lib/iex/evaluator.ex"},{line,24}]},{proc_lib,init_p_do_apply,3,[{file,"proc_lib.erl"},{line,249}]}]}]
+2018-12-27 16:40:08 =SUPERVISOR REPORT====
+     Supervisor: {local,'Elixir.ElixirTryout.Supervisor'}
+     Context:    shutdown_error
+     Reason:     killed
+     Offender:   [{pid,<0.497.0>},{id,'Elixir.DrainStop'},{mfargs,{'Elixir.DrainStop',start_link,[[{timeout,10000},{endpoint,'Elixir.ElixirTryoutWeb.Endpoint'}]]}},{restart_type,permanent},{shutdown,15000},{child_type,worker}]
+
