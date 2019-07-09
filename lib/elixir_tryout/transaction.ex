@@ -8,6 +8,8 @@ defmodule ElixirTryout.Transaction do
     field :amount, :decimal
     field :currency, :string
 
+    belongs_to :sender, Sender
+
     timestamps()
   end
 
